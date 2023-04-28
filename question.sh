@@ -42,23 +42,5 @@
 #  >>> Escriba su codigo a partir de este punto <<<
 #
 
-%%bash
+sed 's/\(\b[0-9]\/\)/0\1/' $1 | sed 's/\/\([0-9]\/\)/\/0\1/' | sed 's/\/\([0-9][0-9]\);/\/20\1;/' | sed 's/\([0-9][0-9]\)\/\([0-9][0-9]\)\/\([0-9][0-9][0-9][0-9]\)/\3-\2-\1/' | sed 's/;\\n/;\\N/' | sed -E 's/(;N|;n)/;\\N/' | sed -E 's/(;;)/;\\N;/' | sed -E 's/(,)/./' | sed -E 's/(;)/,/g' | sed 's/\([a-z]\)/\U\1/' | sed 's/\(,\)\s*$/\1\\\N/'
 
-#!/bin/bash
-
-# Reemplazar fecha de formato DD/MM/YY a YYYY-MM-DD
-sed -i 's|\([0-9]\{2\}\)/\([0-9]\{2\}\)/\([0-9]\{2\}\)|20\3-\2-\1|g' data.csv
-
-# Reemplazar campos nulos por \N
-sed -i 's/\([;,]\)[nN\\n\\N]/\1\\N/g' data.csv
-
-# Reemplazar ; por ,
-sed -i 's/;/,/g' data.csv
-
-# Reemplazar , por . en los campos decimales
-sed -i 's/\([0-9]\),\([0-9]\)/\1.\2/g' data.csv
-
-# Mostrar el archivo resultante en pantalla
-cat data.csv
-
-bash question.sh data.csv > output.csv
