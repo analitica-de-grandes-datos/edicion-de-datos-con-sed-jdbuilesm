@@ -42,7 +42,7 @@
 #  >>> Escriba su codigo a partir de este punto <<<
 #
 
-%%sh
+%%bash
 
 #sed -E 's|^([0-9]{2})/([0-9]{2})/([0-9]{2})|\3-\2-\1|' $1 |
 #sed 's/\\N/\N/g' |
@@ -55,3 +55,4 @@ sed 's/\\N/\\\\N/g' |
 sed 's/;/,/g' |
 sed -E 's/,([0-9]+)/.\1/g'
 $ bash question.sh data.csv > output.csv
+
