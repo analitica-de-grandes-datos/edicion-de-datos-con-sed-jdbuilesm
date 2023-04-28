@@ -41,23 +41,27 @@
 #
 #  >>> Escriba su codigo a partir de este punto <<<
 #
+
+sed -E 's#^([0-9]{1,2})/([0-9]{1,2})/([0-9]{2});([ABC]);([0-9]*);([0-9,.]*)$#20\3-\2-\1,\4,\5,\6#g; s/;/,/g; s/,/./g; s/(^|\n)[,;\t]/\N,/g; s/,([,;\t]|$)/,\N/g' data.csv
+bash question.sh data.csv > output.csv
+
 # Convertir el formato de fechas DD/MM/YY a YYYY-MM-DD
-sed -i 's#\([0-9]\{2\}\)/\([0-9]\{2\}\)/\([0-9]\{2\}\)#20\3-\2-\1#g' data.csv
+#sed -i 's#\([0-9]\{2\}\)/\([0-9]\{2\}\)/\([0-9]\{2\}\)#20\3-\2-\1#g' data.csv
 
 # Reemplazar valores nulos por \N
-sed -i 's/\\N/\N/g' data.csv
-sed -i 's/^$/\N/g' data.csv
+#sed -i 's/\\N/\N/g' data.csv
+#sed -i 's/^$/\N/g' data.csv
 
 # Reemplazar ; por ,
-sed -i 's/;/,/g' data.csv
+#sed -i 's/;/,/g' data.csv
 
 # Reemplazar el indicador de decimales por .
-sed -i 's/,/./g' data.csv
+#sed -i 's/,/./g' data.csv
 
 # Mostrar el resultado en pantalla
-cat data.csv
+#cat data.csv
 
 # Redirigir la salida al archivo output.csv
-cat data.csv > output.csv
+#cat data.csv > output.csv
 
-bash question.sh data.csv > output.csv
+#bash question.sh data.csv > output.csv
