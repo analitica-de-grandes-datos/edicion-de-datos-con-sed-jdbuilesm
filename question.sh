@@ -44,12 +44,14 @@
 
 %%sh
 
-sed -E 's|^([0-9]{2})/([0-9]{2})/([0-9]{2})|\3-\2-\1|' $1 |
+#sed -E 's|^([0-9]{2})/([0-9]{2})/([0-9]{2})|\3-\2-\1|' $1 |
+#sed 's/\\N/\N/g' |
+#sed 's/;/,/g' |
+#sed -E 's/,([0-9]+),([0-9]{2})$/.\1\2/' 
+#bash question.sh data.csv > output.csv
 
-sed 's/\\N/\N/g' |
-
+sed -E 's;([0-9]{2})/([0-9]{2})/([0-9]{2});20\3-\2-\1;' data.csv |
+sed 's/\\N/\\\\N/g' |
 sed 's/;/,/g' |
-
-sed -E 's/,([0-9]+),([0-9]{2})$/.\1\2/' 
-
-bash question.sh data.csv > output.csv
+sed -E 's/,([0-9]+)/.\1/g'
+$ bash question.sh data.csv > output.csv
